@@ -1,9 +1,23 @@
 package com.company;
 
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
-
+        Scanner scanner = new Scanner(System.in);
+        int n = 4, m = 4;
+        String [][] matrix = new String[n][m];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                matrix[i][j] = scanner.next();
+            }
+        }
+        try{
+            System.out.println("Sum is :" + matrixSum(matrix,n,m));
+        }catch (MyArraySizeException | MyArrayDataException exception){
+            exception.printStackTrace();
+        }
     }
     public static int matrixSum(String[][] matrix,int n,int m) throws MyArraySizeException,MyArrayDataException{
         boolean sizeIsCorrect = matrix.length == n;
@@ -19,7 +33,7 @@ public class Main {
                     sum += Integer.parseInt(matrix[i][j]);
                 }
                 catch (NumberFormatException exception){
-                    throw new MyArrayDataException("Invalid integer at column "+i+", row "+j, exception);
+                    throw new MyArrayDataException("Invalid integer at row "+i+", column "+j, exception);
                 }
             }
         }
